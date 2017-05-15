@@ -1,0 +1,4 @@
+services:
+#    dummy_currency_converter.example:
+#        class: DummyCurrencyConverterBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
