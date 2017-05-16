@@ -9,7 +9,8 @@ class RandomCurrencyConverterService extends CurrencyConverterInterface
     /**
      * @ApiDoc(
      *   resource = true,
-     *   description = "Converts an amount on a certain currency to GBP",
+     *   description = "Converts an amount on a certain currency to GBP"
+     * )
      *
      * @return Response
      */
