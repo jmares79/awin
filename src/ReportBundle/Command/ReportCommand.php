@@ -25,6 +25,6 @@ class ReportCommand extends ContainerAwareCommand
         $merchantId = $input->getArgument('merchantId');
         $reportService = $this->getContainer()->get('report_service');
 
-        // $reportService->createReport($merchantId);
+        $reportService->createReport($merchantId);
     }
 }
