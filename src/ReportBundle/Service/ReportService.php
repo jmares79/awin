@@ -15,7 +15,7 @@ class ReportService
 
     public function createReport($merchantId)
     {
-        var_dump("Creating report from ReportService");
+        var_dump("Creating report from ReportService for Merchant $merchantId");
     }
 
     public function printReport()
