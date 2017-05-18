@@ -4,8 +4,11 @@ parameters:
     #parameter_name: value
 
 services:
+    currency_exchange_rate_service:
+      class: CurrencyBundle\Service\StaticCurrencyExchangeRateService
     currency_converter_service:
       class: CurrencyBundle\Service\CurrencyConverterService
+      arguments: ["@currency_exchange_rate_service"]
     output_printer_service:
       class: ReportBundle\Service\OutputPrinterService
     transaction_merchant_service:
