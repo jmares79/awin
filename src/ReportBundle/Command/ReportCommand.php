@@ -20,8 +20,6 @@ class ReportCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        var_dump('executing report');
-
         $merchantId = $input->getArgument('merchantId');
         $reportService = $this->getContainer()->get('report_service');
 
