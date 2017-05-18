@@ -50,7 +50,7 @@ class CurrencyConverterService implements CurrencyConverterInterface
     {
         $parsedAmount = [];
 
-        preg_match_all('/([\$|€|£])?(\d+\.\d+)/', $amount, $parsedAmount, PREG_PATTERN_ORDER);
+        preg_match_all('/([\$|€|£])?(\d+\.\d+)/u', $amount, $parsedAmount, PREG_PATTERN_ORDER);
 
         return [$parsedAmount[1][0], $parsedAmount[2][0]];
     }
