@@ -4,9 +4,14 @@ parameters:
     #parameter_name: value
 
 services:
+    currency_converter_service:
+      class: CurrencyBundle\Service\CurrencyConverterService
     output_printer_service:
-       class: ReportBundle\Service\OutputPrinterService
+      class: ReportBundle\Service\OutputPrinterService
+    transaction_merchant_service:
+      class: MerchantBundle\Service\FileMerchantService
+      arguments: ["@currency_converter_service"]
     report_service:
-       class: ReportBundle\Service\ReportService
-       arguments: ["@output_printer_service"]
+      class: ReportBundle\Service\ReportService
+      arguments: ["@output_printer_service", "@transaction_merchant_service"]
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace CurrencyConverterBundle\Interfaces;
+namespace CurrencyBundle\Interfaces;
 
 interface CurrencyConverterInterface
 {

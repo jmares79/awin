@@ -3,8 +3,7 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: "@MerchantBundle/Resources/config/services.yml" }
-    - { resource: "@CurrencyConverterBundle/Resources/config/services.yml" }
-    - { resource: "@DummyCurrencyConverterBundle/Resources/config/services.yml" }
+    - { resource: "@CurrencyBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
