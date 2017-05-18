@@ -4,5 +4,5 @@ namespace CurrencyBundle\Interfaces;
 
 interface CurrencyConverterInterface
 {
-    public function convert($amount, $currency);
+    public function convert($amount);
 }

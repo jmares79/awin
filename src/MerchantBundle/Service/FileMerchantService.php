@@ -11,6 +11,7 @@ use CurrencyBundle\Interfaces\CurrencyConverterInterface;
  */
 class FileMerchantService implements TransactionFetcherInterface
 {
+    //TODO send this to config by default OR an optional parameter
     const TRANSACTION_FILE = 'data/data.csv';
 
     protected $converter;
@@ -25,6 +26,7 @@ class FileMerchantService implements TransactionFetcherInterface
      * Fetches the transaction from a file source, returning a list of transactions
      *
      * @param $merchantId The Id of the merchant to be retrieved
+     * @return Fills the internal attribute transactions
      */
     public function fetchTransactions($merchantId = null)
     {
@@ -33,7 +35,7 @@ class FileMerchantService implements TransactionFetcherInterface
     }
 
     /**
-     * Parses the transaction file, returning an array with the lines of the parsed CSV
+     * Parses the transactions data file and prepares the transactions to be shown
      *
      * @param int $merchantId
      * @throws FileParsingException on file error
@@ -64,6 +66,6 @@ class FileMerchantService implements TransactionFetcherInterface
     {
         list($id, $date, $amount) = $transaction;
 
-        //return [$id, $data, $this->converter->convert($amount)];
+        return [$id, $date, $this->converter->convert($amount)];
     }
 }
