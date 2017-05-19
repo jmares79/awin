@@ -9,6 +9,7 @@ class ReportService
 {
     protected $outputPrinter;
     protected $merchantService;
+    protected $transactions;
 
     public function __construct(
         OutputReportInterface $outputPrinter,
@@ -19,15 +20,28 @@ class ReportService
         $this->merchantService = $merchantService;
     }
 
+    /**
+     * Creates the report from the passed stream/file
+     *
+     * @param $merchantId The Id of the merchant to be retrieved
+     *
+     * @return Fills the internal transactions attribute
+     */
     public function createReport($merchantId)
     {
-        // var_dump("Creating report from ReportService for Merchant $merchantId");
-        $this->merchantService->fetchTransactions($merchantId);
+        $this->transactions = $this->merchantService->fetchTransactions($merchantId);
     }
 
+    /**
+     * Prints the report to stdout using the provided service
+     *
+     * @return void Prints data
+     */
     public function printReport()
     {
-        // var_dump("Creating report from ReportService");
-        $this->outputPrinter->show();
+        $this->outputPrinter->show(
+            $this->merchantService->getHeader(),
+            $this->transactions
+        );
     }
 }
