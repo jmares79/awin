@@ -10,7 +10,7 @@ services:
       class: CurrencyBundle\Service\CurrencyConverterService
       arguments: ["@currency_exchange_rate_service"]
     output_printer_service:
-      class: ReportBundle\Service\OutputPrinterService
+      class: ReportBundle\Service\OutputStdPrinterService
     transaction_merchant_service:
       class: MerchantBundle\Service\FileMerchantService
       arguments: ["@currency_converter_service"]

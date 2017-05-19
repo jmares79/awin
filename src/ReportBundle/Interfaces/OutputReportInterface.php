@@ -4,5 +4,5 @@ namespace ReportBundle\Interfaces;
 
 interface OutputReportInterface
 {
-    public function show();
+    public function show($header, $transactions);
 }

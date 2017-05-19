@@ -13,9 +13,9 @@ class StaticCurrencyExchangeRateService implements CurrencyExchangeRateInterface
      * @var The static hardcoded rates took from Google finance in the format USD = 0.77 * GBP
      */
     protected $rates = [
-        '$' => ['symbol' => 'USD', 'rate' => 0.77],
-        '£' => ['symbol' => 'GBP', 'rate' => 1],
-        '€' => ['symbol' => 'EUR', 'rate' => 0.85]
+        '$' => ['name' => 'USD', 'rate' => 0.77],
+        '£' => ['name' => 'GBP', 'rate' => 1],
+        '€' => ['name' => 'EUR', 'rate' => 0.85]
     ];
 
     /**
