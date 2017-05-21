@@ -14,12 +14,16 @@ class FileMerchantService implements TransactionFetcherInterface
     //TODO send this to config by default OR an optional parameter
     const TRANSACTION_FILE = 'data/data.csv';
 
+    protected $handler;
     protected $header;
     protected $converter;
+    protected $transactions;
+    protected $converted;
 
     public function __construct(CurrencyConverterInterface $converter)
     {
         $this->converter = $converter;
+        $this->getHandler();
     }
 
     public function getHeader()
@@ -30,52 +34,67 @@ class FileMerchantService implements TransactionFetcherInterface
     /**
      * Fetches the transaction from a file source, returning a list of them
      *
-     * @param $merchantId The Id of the merchant to be retrieved
-     *
-     * @return The fecthed & converted transactions
-     */
-    public function fetchTransactions($merchantId = null)
-    {
-        return $this->parseTransactions($merchantId);
-    }
-
-    /**
-     * Parses the transactions data file and prepares it to be shown
-     *
      * @param int $merchantId
      *
      * @throws FileParsingException on file error
      * @return An array with the converted transactions
      */
-    protected function parseTransactions($merchantId = null)
+    public function fetchTransactions($merchantId = null)
     {
-        if (!$handler = fopen(self::TRANSACTION_FILE, 'r')) throw new FileParsingException();
+        $transactions = [];
 
-        $convertedTransactions = [];
+        $this->parseHeader();
 
-        $this->parseHeader($handler);
-
-        while ($row = fgetcsv($handler)) {
+        while ($row = fgetcsv($this->handler)) {
             $transaction = $this->parseRow($row);
 
             if ($transaction[0] == $merchantId) {
-                $convertedTransactions[] = $this->prepareTransaction($transaction);
+                $this->transactions[] = $transaction;
             }
         }
+    }
 
-        return $convertedTransactions;
+    /**
+     * Prepares the transactions by converting the amount to the base currency
+     *
+     * @param internal $transactions
+     *
+     * @return An array with the converted transactions
+     */
+    public function prepareTransactions()
+    {
+        $converted = [];
+
+        foreach ($this->transactions as $transaction) {
+            list($id, $date, $amount) = $transaction;
+
+            $this->converted[] = [$id, $date, $this->converter->convert($amount)];
+        }
+    }
+
+    public function getTransactions()
+    {
+        return $this->transactions;
+    }
+
+    public function getConvertedTransactions()
+    {
+        return $this->converted;
+    }
+
+    protected function getHandler()
+    {
+        if (!$this->handler = fopen(self::TRANSACTION_FILE, 'r')) throw new FileParsingException();
     }
 
     /**
      * Parses the header of the stream
      *
-     * @param mixed $streamHandler
-     *
      * @return An array with the header data
      */
-    protected function parseHeader($row)
+    protected function parseHeader()
     {
-        $headerRow = fgetcsv($row);
+        $headerRow = fgetcsv($this->handler);
         $this->header = $this->parseRow($headerRow);
     }
 
@@ -89,19 +108,5 @@ class FileMerchantService implements TransactionFetcherInterface
     protected function parseRow($row)
     {
         return explode(";", str_replace("\"", "", $row[0]));
-    }
-
-    /**
-     * Prepares the transaction by converting the amount to the base currency
-     *
-     * @param mixed $transaction
-     *
-     * @return An array with the converted transactions
-     */
-    protected function prepareTransaction($transaction)
-    {
-        list($id, $date, $amount) = $transaction;
-
-        return [$id, $date, $this->converter->convert($amount)];
     }
 }

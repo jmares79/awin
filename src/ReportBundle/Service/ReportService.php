@@ -29,7 +29,8 @@ class ReportService
      */
     public function createReport($merchantId)
     {
-        $this->transactions = $this->merchantService->fetchTransactions($merchantId);
+        $this->merchantService->fetchTransactions($merchantId);
+        $this->merchantService->prepareTransactions();
     }
 
     /**
@@ -41,7 +42,7 @@ class ReportService
     {
         $this->outputPrinter->show(
             $this->merchantService->getHeader(),
-            $this->transactions
+            $this->merchantService->getConvertedTransactions()
         );
     }
 }

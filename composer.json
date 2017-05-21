@@ -21,7 +21,8 @@
         "sensio/framework-extra-bundle": "^3.0.2",
         "symfony/polyfill-apcu": "^1.0",
         "symfony/symfony": "3.2.*",
-        "nelmio/api-doc-bundle": "^2.9"
+        "nelmio/api-doc-bundle": "^2.9",
+        "phpunit/phpunit": "^5.7"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
@@ -42,12 +43,6 @@
         "post-update-cmd": [
             "@symfony-scripts"
         ]
-    },
-    "config": {
-        "platform": {
-            "php": "5.5.9"
-        },
-        "sort-packages": true
     },
     "extra": {
         "symfony-app-dir": "app",
