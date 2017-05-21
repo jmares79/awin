@@ -15,6 +15,7 @@ class AppKernel extends Kernel
             new ReportBundle\ReportBundle(),
             new MerchantBundle\MerchantBundle(),
             new CurrencyBundle\CurrencyBundle(),
+            new StreamDataBundle\StreamDataBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

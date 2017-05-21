@@ -30,7 +30,7 @@ class ReportService
     public function createReport($merchantId)
     {
         $this->merchantService->fetchTransactions($merchantId);
-        $this->merchantService->prepareTransactions();
+        $this->merchantService->convertTransactions();
     }
 
     /**
