@@ -1,6 +1,6 @@
 <?php
 
-namespace CurrencyConverterBundle\Tests\Controller;
+namespace StreamDataBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
