@@ -48,6 +48,8 @@ class StreamDataService implements StreamDataInterface
             }
         }
 
+        fclose($this->handler);
+
         return [
             'header' => $this->header,
             'transactions' => $this->transactions
