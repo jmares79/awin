@@ -17,5 +17,5 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
-    dir_data_name: ~
-    file_data_name: ~
+    dir_data_name: 'data/'
+    file_data_name: 'data.csv'
