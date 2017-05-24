@@ -4,9 +4,12 @@ parameters:
     #parameter_name: value
 
 services:
+    file_reader_service:
+      class: StreamDataBundle\Service\FileReaderService
+      arguments: ['%dir_data_name%','%file_data_name%']
     stream_data_service:
       class: StreamDataBundle\Service\StreamDataService
-      arguments: ['%dir_data_name%','%file_data_name%']
+      arguments: ['@file_reader_service']
     currency_exchange_rate_service:
       class: CurrencyBundle\Service\StaticCurrencyExchangeRateService
     currency_converter_service:
