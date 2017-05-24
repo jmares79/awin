@@ -22,8 +22,6 @@ class StreamDataService implements StreamDataInterface
     {
         $this->streamDirectory = $streamDirectory;
         $this->streamName = $streamName;
-
-        $this->openStream();
     }
 
     public function setStreamDirectory($dir)
@@ -36,11 +34,21 @@ class StreamDataService implements StreamDataInterface
         $this->setStreamPath = $path;
     }
 
-    public function getData($merchantId)
+    public function fetchData($merchantId)
     {
-        $this->parseHeader();
+        $this->openStream();
 
-        while ($row = fgetcsv($this->handler)) {
+        $this->parseHeader();
+        $data = $this->getData($merchantId);
+
+        $this->closeStream();
+
+        return $data;
+    }
+
+    protected function getData($merchantId)
+    {
+        while ($row = $this->getStreamRow()) {
             $transaction = $this->parseRow($row);
 
             if ($transaction[0] == $merchantId) {
@@ -48,12 +56,20 @@ class StreamDataService implements StreamDataInterface
             }
         }
 
-        fclose($this->handler);
-
         return [
             'header' => $this->header,
             'transactions' => $this->transactions
         ];
+    }
+
+    /**
+     * Parses and return a row of the stream
+     *
+     * @return An array with the row data
+     */
+    protected function getStreamRow()
+    {
+        return fgetcsv($this->handler);
     }
 
     /**
@@ -70,6 +86,11 @@ class StreamDataService implements StreamDataInterface
     protected function openStream()
     {
         if (!$this->handler = fopen($this->getFullPath(), self::READ_MODE)) throw new FileParsingException();
+    }
+
+    protected function closeStream()
+    {
+        fclose($this->handler);
     }
 
     protected function getFullPath()

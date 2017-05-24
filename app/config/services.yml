@@ -6,7 +6,7 @@ parameters:
 services:
     stream_data_service:
       class: StreamDataBundle\Service\StreamDataService
-      arguments: [%dir_data_name%, %file_data_name%]
+      arguments: ['%dir_data_name%','%file_data_name%']
     currency_exchange_rate_service:
       class: CurrencyBundle\Service\StaticCurrencyExchangeRateService
     currency_converter_service:

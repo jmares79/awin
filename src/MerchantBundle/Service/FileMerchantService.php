@@ -40,7 +40,7 @@ class FileMerchantService implements TransactionFetcherInterface
      */
     public function fetchTransactions($merchantId = null)
     {
-        $this->data = $this->stream->getData($merchantId);
+        $this->data = $this->stream->fetchData($merchantId);
     }
 
     /**
