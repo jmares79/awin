@@ -21,7 +21,8 @@
         "symfony/polyfill-apcu": "^1.0",
         "symfony/symfony": "3.2.*",
         "nelmio/api-doc-bundle": "^2.9",
-        "phpunit/phpunit": "^5.7"
+        "phpunit/phpunit": "^5.7",
+        "mikey179/vfsStream": "~1"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

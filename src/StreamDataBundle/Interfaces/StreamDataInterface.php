@@ -7,5 +7,5 @@ namespace StreamDataBundle\Interfaces;
  */
 interface StreamDataInterface
 {
-    public function getData($merchantId);
+    public function fetchData($merchantId);
 }
