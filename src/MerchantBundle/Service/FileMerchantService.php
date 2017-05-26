@@ -30,12 +30,15 @@ class FileMerchantService implements TransactionFetcherInterface
         return $this->data['header'];
     }
 
+    public function getFetchedTransactions()
+    {
+        return $this->data['transactions'];
+    }
     /**
      * Fetches the transaction from a file source, returning a list of them
      *
      * @param int $merchantId
      *
-     * @throws FileParsingException on file error
      * @return An array with the converted transactions
      */
     public function fetchTransactions($merchantId = null)

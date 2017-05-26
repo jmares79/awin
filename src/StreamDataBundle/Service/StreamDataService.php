@@ -30,8 +30,8 @@ class StreamDataService implements StreamDataInterface
     public function fetchData($merchantId)
     {
         $this->reader->openStream();
-        $this->reader->parseHeader();
 
+        $this->reader->parseHeader();
         $data = $this->getData($merchantId);
 
         $this->reader->closeStream();

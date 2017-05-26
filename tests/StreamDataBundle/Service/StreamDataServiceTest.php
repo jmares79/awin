@@ -24,7 +24,7 @@ class StreamDataServiceTest extends TestCase
     /**
      * @dataProvider emptyRowProvider
      */
-    public function testTransactionHeadersAreCreated($merchantId, $count)
+    public function testTransactionHeadersAreCreated($merchantId)
     {
         $this->mockedReader->method('getFileRow')->willReturn(false);
 
@@ -48,7 +48,7 @@ class StreamDataServiceTest extends TestCase
     public function emptyRowProvider()
     {
         return array(
-            array(self::ID, self::NO_DATA)
+            array(self::ID)
         );
     }
 
