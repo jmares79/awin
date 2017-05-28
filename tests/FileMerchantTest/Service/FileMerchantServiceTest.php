@@ -20,7 +20,6 @@ class FileMerchantServiceTest extends TestCase
         $this->mockedStream = $this->createMock(StreamDataService::class);
         $this->mockedConverter = $this->createMock(CurrencyConverterService::class);
 
-
         $this->merchant = new FileMerchantService($this->mockedConverter, $this->mockedStream);
     }
 
