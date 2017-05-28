@@ -9,6 +9,7 @@ use ReportBundle\Interfaces\OutputReportInterface;
  */
 class OutputStdPrinterService implements OutputReportInterface
 {
+    const DECIMALS = 2;
     const SEPARATOR = ' - ';
     const GBP = '£';
 
@@ -39,6 +40,7 @@ class OutputStdPrinterService implements OutputReportInterface
 
         for ($i = 0; $i < $names; $i++) {
             echo ucfirst($header[$i]);
+
             if ($i < $names-1) echo self::SEPARATOR;
         }
 
@@ -55,7 +57,8 @@ class OutputStdPrinterService implements OutputReportInterface
     protected function showTransactions($transactions)
     {
         foreach ($transactions as $transaction) {
-            $transaction[2] = self::GBP.$transaction[2];
+            $transaction[2] = number_format($transaction[2], self::DECIMALS);
+            $transaction[2] = self::GBP . $transaction[2];
 
             echo implode(self::SEPARATOR, $transaction);
             echo PHP_EOL;
